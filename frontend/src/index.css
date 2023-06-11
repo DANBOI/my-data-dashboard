@@ -19,10 +19,6 @@ body {
   padding: 0;
   min-width: 320px;
   min-height: 100vh;
-  color: var(--primary-color);
-  background-color: var(--background-color);
-}
-
-.app {
-  background-color: #a6adba;
+  /* color: var(--primary-color);
+  background-color: var(--background-color); */
 }
