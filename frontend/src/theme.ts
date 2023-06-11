@@ -1,5 +1,12 @@
 import { createTheme } from "@mui/material";
 
+declare module "@mui/material/styles" {
+  //expand property types
+  interface PaletteColor {
+    [key: number]: string;
+  }
+}
+
 const theme = createTheme({
   palette: {
     primary: {
