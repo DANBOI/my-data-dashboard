@@ -40,7 +40,7 @@ export default function Header() {
       {/* logo */}
       <Stack direction="row" alignItems="center" spacing={2}>
         <CameraIcon sx={{ fontSize: "28px" }} />
-        <Typography variant="h4" fontSize="16px">
+        <Typography variant="h4" fontSize="16px" letterSpacing={2}>
           MERN
         </Typography>
       </Stack>

@@ -59,7 +59,7 @@ const theme = createTheme({
       // 800: "#0c0e11",
       // 900: "#060708"
       default: "#1d232a",
-      paper: "#777b7f",
+      paper: "#171c22",
     },
   },
 
