@@ -6,6 +6,7 @@ import morgan from "morgan";
 
 import connectDB from "./utils/db";
 import router from "./routes";
+import { errorHandler, notFound } from "./middlewares/errorHandler";
 
 // configs
 dotenv.config();
@@ -23,9 +24,13 @@ connectDB();
 
 //routes
 app.use("/api", router());
-app.get("*", (_, res) => {
-  res.send("API is running....");
-});
+// app.get("*", (_, res) => {
+//   res.send("API is running....");
+// });
+
+// catch errors all-in-one
+app.use(notFound);
+app.use(errorHandler);
 
 //start server
 const port = process.env.PORT || 5000;

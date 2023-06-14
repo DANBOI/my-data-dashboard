@@ -6,7 +6,7 @@ let isConnected = false;
 
 export default async () => {
   mongoose.set("strictQuery", true);
-  mongoose.Promise = Promise;
+  // mongoose.Promise = Promise;
 
   if (isConnected) {
     console.warn("MongoDB is already connected");
@@ -14,17 +14,15 @@ export default async () => {
   }
 
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      // dbName: "dashboard",
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+    const conn = await mongoose.connect(process.env.MONGODB_URI || "", {
+      dbName: "dashboard",
     });
 
     isConnected = true;
-    console.log(`MongoDB Connected: ${mongoose.connection.host}`);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
 
     /* ADD DATA ONE TIME ONLY OR AS NEEDED */
-    // await mongoose.connection.db.dropDatabase();
+    // await mongoose.connection.dropDatabase();
     // await insertKpiData();
   } catch (error: any) {
     console.error(`Error: ${error.message}`);

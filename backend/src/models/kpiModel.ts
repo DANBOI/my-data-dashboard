@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Types, Schema, models, model } from "mongoose";
 import { loadType } from "mongoose-currency";
 import { kpis } from "../../data";
 
@@ -6,13 +6,14 @@ import { kpis } from "../../data";
 loadType(mongoose);
 
 const currencySchemaType = {
-  type: mongoose.Types.Currency,
+  // @ts-ignore
+  type: Types.Currency,
   currency: "USD",
-  get: (v: number) => v / 100,
+  get: (value: number) => value / 100,
 };
 
 //Schemas
-const monthSchema = new mongoose.Schema(
+const monthSchema = new Schema(
   {
     month: String,
     revenue: currencySchemaType,
@@ -23,7 +24,7 @@ const monthSchema = new mongoose.Schema(
   { toJSON: { getters: true } }
 );
 
-const daySchema = new mongoose.Schema(
+const daySchema = new Schema(
   {
     date: String,
     revenue: currencySchemaType,
@@ -32,7 +33,7 @@ const daySchema = new mongoose.Schema(
   { toJSON: { getters: true } }
 );
 
-const kpiSchema = new mongoose.Schema(
+const kpiSchema = new Schema(
   {
     totalProfit: currencySchemaType,
     totalRevenue: currencySchemaType,
@@ -41,16 +42,15 @@ const kpiSchema = new mongoose.Schema(
     dailyData: [daySchema],
     //nested document with arbitrary keys
     expensesByCategory: {
-      salaries: currencySchemaType,
-      supplies: currencySchemaType,
-      services: currencySchemaType,
+      type: Map,
+      of: currencySchemaType,
     },
   },
   { timestamps: true, toJSON: { getters: true } }
 );
 
 // check kpiModel if is exsits first.
-const Kpi = mongoose.models.Kpi || mongoose.model("Kpi", kpiSchema);
+const Kpi = models.Kpi || model("Kpi", kpiSchema);
 
 export const insertKpiData = () => Kpi.insertMany(kpis);
 

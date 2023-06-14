@@ -1,12 +1,12 @@
-import express from "express";
+import { Request, Response } from "express";
+import asyncHandler from "express-async-handler";
 import Kpi from "../models/kpiModel";
 
-export const getKpis = async (req: express.Request, res: express.Response) => {
-  try {
-    const kpis = await Kpi.find();
-    return res.status(200).json(kpis).end();
-  } catch (error: any) {
-    console.log(error.message);
-    return res.sendStatus(404);
+export const getKpis = asyncHandler(async (req: Request, res: Response) => {
+  const kpis = await Kpi.find();
+  if (kpis?.length) res.json(kpis);
+  else {
+    res.status(404);
+    throw new Error("kpiData not found");
   }
-};
+});
