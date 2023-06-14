@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { insertKpiData } from "../models/kpiModel";
 
 // track the connection
 let isConnected = false;
@@ -14,13 +15,17 @@ export default async () => {
 
   try {
     await mongoose.connect(process.env.MONGODB_URI, {
-      dbName: "dashboard",
+      // dbName: "dashboard",
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
 
     isConnected = true;
     console.log(`MongoDB Connected: ${mongoose.connection.host}`);
+
+    /* ADD DATA ONE TIME ONLY OR AS NEEDED */
+    // await mongoose.connection.db.dropDatabase();
+    // await insertKpiData();
   } catch (error: any) {
     console.error(`Error: ${error.message}`);
     process.exit(1);

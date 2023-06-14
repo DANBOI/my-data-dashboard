@@ -1,9 +1,9 @@
 import express from "express";
-import kpisRouter from "./kpis";
+import kpiRouter from "./kpiRoute";
 
 const router = express.Router();
 
 export default (): express.Router => {
-  kpisRouter(router);
+  kpiRouter(router);
   return router;
 };
