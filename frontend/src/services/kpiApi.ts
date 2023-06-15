@@ -1,5 +1,5 @@
 import mainApi from "./index";
-import { Kpi } from "./types";
+import { Kpi } from "@/types";
 
 // subApi injected to the mainApi
 const kpiApi = mainApi.injectEndpoints({
