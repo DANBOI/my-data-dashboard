@@ -13,7 +13,7 @@ export default function Widget({
   gridArea,
   icon,
   title,
-  subtitle,
+  subtitle = "",
   sideText,
   children,
 }: Props) {

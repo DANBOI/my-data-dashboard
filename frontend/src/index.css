@@ -2,7 +2,6 @@
   font-family: Inter, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   --primary-color: #f87272;
   --secondary-color: #a6adba;
   --background-color: #1d232a;
@@ -15,14 +14,15 @@
 }
 
 body {
+  /* height: 100vh; */
   margin: 0;
   padding: 0;
-  min-width: 320px;
-  height: 100vh;
+  /* min-width: 320px; */
+  min-height: 100vh;
   /* color: var(--primary-color);
   background-color: var(--background-color); */
 }
 
 #root {
-  height: 100%;
+  height: 100vh;
 }

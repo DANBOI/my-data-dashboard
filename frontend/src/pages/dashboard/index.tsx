@@ -106,8 +106,13 @@ export default function Dashboard() {
       />
 
       {/* row2 */}
-      <Widget4 />
-      <Widget5 />
+      <Widget4
+        data={kpiData}
+        error={kpiError}
+        isLoading={kpiLoading}
+        palette={palette}
+      />
+      <Widget5 palette={palette} />
       <Widget6 />
 
       {/* row3 */}
