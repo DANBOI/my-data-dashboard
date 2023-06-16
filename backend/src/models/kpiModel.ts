@@ -5,7 +5,7 @@ import { kpis } from "../../data";
 //support currency type in mongoose
 loadType(mongoose);
 
-const currencySchemaType = {
+export const currencySchemaType = {
   // @ts-ignore
   type: Types.Currency,
   currency: "USD",
