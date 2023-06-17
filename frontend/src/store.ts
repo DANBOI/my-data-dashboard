@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import mainApi from "./services/index";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
+import mainApi from "./services/index";
 
 const store = configureStore({
   reducer: {
@@ -9,7 +9,7 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     //chainable middleware
     getDefaultMiddleware().concat(mainApi.middleware),
-  devTools: true,
+  devTools: false,
 });
 
 //required for refetchOnFocus/refetchOnReconnect behaviors
