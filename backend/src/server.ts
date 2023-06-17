@@ -27,19 +27,21 @@ connectDB();
 app.use("/api", router());
 
 //serve static files
+/* don't need this when deploying seperately
 if (process.env.NODE_ENV === "production") {
   const __dirname = path.resolve();
   //  frontend/dist ( if use create-react-app then the path is "frontend/build")
   app.use(express.static(path.join(__dirname, "/dist")));
-
+  
   app.get("*", (_, res: express.Response) =>
-    res.sendFile(path.resolve(__dirname, "dist", "index.html"))
+  res.sendFile(path.resolve(__dirname, "dist", "index.html"))
   );
 } else {
   app.get("/", (_, res: express.Response) => {
     res.send("API is running....");
   });
 }
+*/
 
 // catch errors all-in-one
 app.use(notFound);
