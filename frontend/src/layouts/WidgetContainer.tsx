@@ -50,7 +50,7 @@ export default function Widget({
         <Typography
           variant="h5"
           fontWeight="700"
-          color={palette.secondary[500]}
+          color={palette.secondary[200]}
         >
           {sideText}
         </Typography>

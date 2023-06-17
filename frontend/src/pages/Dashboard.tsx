@@ -85,8 +85,13 @@ export default function Dashboard() {
         isLoading={transactionLoading}
         palette={palette}
       />
-      <Widget9 />
-      <Widget10 />
+      <Widget9
+        data={kpiData}
+        error={kpiError}
+        isLoading={kpiLoading}
+        palette={palette}
+      />
+      <Widget10 palette={palette} />
     </DashboardGrid>
   );
 }
