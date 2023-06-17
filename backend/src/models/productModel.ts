@@ -1,6 +1,6 @@
 import { Schema, models, model } from "mongoose";
 import { currencySchemaType } from "./kpiModel";
-import { products } from "../../data";
+// import { products } from "../../data";
 
 //Schemas
 const ProductSchema = new Schema(
@@ -20,6 +20,6 @@ const ProductSchema = new Schema(
 // check kpiModel if is exsits first.
 const Product = models.Product || model("Product", ProductSchema);
 
-export const insertProductsData = () => Product.insertMany(products);
+// export const insertProductsData = () => Product.insertMany(products);
 
 export default Product;

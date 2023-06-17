@@ -1,6 +1,6 @@
 import { Schema, models, model } from "mongoose";
 import { currencySchemaType } from "./kpiModel";
-import { transactions } from "../../data";
+// import { transactions } from "../../data";
 
 //Schemas
 const TransactionSchema = new Schema(
@@ -24,7 +24,7 @@ const TransactionSchema = new Schema(
 const Transaction =
   models.Transaction || model("Transaction", TransactionSchema);
 
-export const insertTransactionsData = () =>
-  Transaction.insertMany(transactions);
+// export const insertTransactionsData = () =>
+//   Transaction.insertMany(transactions);
 
 export default Transaction;

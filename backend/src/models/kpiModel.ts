@@ -1,6 +1,6 @@
 import mongoose, { Types, Schema, models, model } from "mongoose";
 import { loadType } from "mongoose-currency";
-import { kpis } from "../../data";
+// import { kpis } from "../../data";
 
 //support currency type in mongoose
 loadType(mongoose);
@@ -52,6 +52,6 @@ const kpiSchema = new Schema(
 // check kpiModel if is exsits first.
 const Kpi = models.Kpi || model("Kpi", kpiSchema);
 
-export const insertKpiData = () => Kpi.insertMany(kpis);
+// export const insertKpiData = () => Kpi.insertMany(kpis);
 
 export default Kpi;
