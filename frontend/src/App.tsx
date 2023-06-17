@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import theme from "./theme";
 import Header from "./components/Header";
 import Dashboard from "./pages/Dashboard";
+import Forecast from "./pages/Forecast";
 
 export default function App() {
   return (
@@ -18,7 +19,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Navigate to="/dashboard" />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/forecast" element={<main>Forecast page</main>} />
+            <Route path="/forecast" element={<Forecast />} />
           </Routes>
         </BrowserRouter>
       </Box>
