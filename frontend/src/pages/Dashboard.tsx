@@ -1,18 +1,19 @@
 import { useTheme } from "@mui/material";
 import { useGetKpisQuery } from "@/services/kpiApi";
 import { useGetProductsQuery } from "@/services/productApi";
+import { useGetTransactionsQuery } from "@/services/transactionApi";
 
-import DashboardGrid from "@/components/DashboardGrid";
-import Widget1 from "./Widget-1";
-import Widget2 from "./Widget-2";
-import Widget3 from "./Widget-3";
-import Widget4 from "./Widget-4";
-import Widget5 from "./Widget-5";
-import Widget6 from "./Widget-6";
-import Widget7 from "./Widget-7";
-import Widget8 from "./Widget-8";
-import Widget9 from "./Widget-9";
-import Widget10 from "./Widget-10";
+import DashboardGrid from "@/layouts/DashboardGrid";
+import Widget1 from "@/components/widgets/Widget-1";
+import Widget2 from "@/components/widgets/Widget-2";
+import Widget3 from "@/components/widgets/Widget-3";
+import Widget4 from "@/components/widgets/Widget-4";
+import Widget5 from "@/components/widgets/Widget-5";
+import Widget6 from "@/components/widgets/Widget-6";
+import Widget7 from "@/components/widgets/Widget-7";
+import Widget8 from "@/components/widgets/Widget-8";
+import Widget9 from "@/components/widgets/Widget-9";
+import Widget10 from "@/components/widgets/Widget-10";
 
 export default function Dashboard() {
   const { palette } = useTheme();
@@ -27,6 +28,12 @@ export default function Dashboard() {
     error: productError,
     isLoading: productLoading,
   } = useGetProductsQuery();
+
+  const {
+    data: transactionData,
+    error: transactionError,
+    isLoading: transactionLoading,
+  } = useGetTransactionsQuery();
 
   return (
     <DashboardGrid>
@@ -72,7 +79,12 @@ export default function Dashboard() {
         isLoading={productLoading}
         palette={palette}
       />
-      <Widget8 />
+      <Widget8
+        data={transactionData}
+        error={transactionError}
+        isLoading={transactionLoading}
+        palette={palette}
+      />
       <Widget9 />
       <Widget10 />
     </DashboardGrid>

@@ -4,14 +4,13 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 import { SerializedError } from "@reduxjs/toolkit";
 import { Kpi } from "@/types";
 
-import Widget from "@/components/WidgetContainer";
+import Widget from "@/layouts/WidgetContainer";
 import {
   ResponsiveContainer,
   CartesianGrid,
   LineChart,
   XAxis,
   YAxis,
-  Legend,
   Line,
   Tooltip,
 } from "recharts";
@@ -23,36 +22,34 @@ type Props = {
   palette: Palette;
 };
 
-export default function Widget2({ data, error, isLoading, palette }: Props) {
-  const revenueProfit = useMemo(
+export default function Widget4({ data, error, isLoading, palette }: Props) {
+  const expenses = useMemo(
     () =>
       data &&
-      data[0].monthlyData.map(({ month, revenue, expenses }) => ({
-        name: month.slice(0, 3).toUpperCase(),
-        profit: (revenue - expenses).toFixed(2),
-        revenue,
-      })),
+      data[0].monthlyData.map(
+        ({ month, operationalExpenses, nonOperationalExpenses }) => ({
+          name: month.slice(0, 3).toUpperCase(),
+          operationalExpenses,
+          nonOperationalExpenses,
+        })
+      ),
     [data]
   );
 
   return (
     <Widget
-      gridArea="Widget-2"
-      title="Profit and Revenue"
-      subtitle="top line represents revenue, bottom line represents expenses"
+      gridArea="Widget-4"
+      title="Operational vs Non-Operational Expenses"
       sideText="+4%"
     >
       {error ? (
         <>Oh no, there was an error</>
       ) : isLoading ? (
         <>Loading...</>
-      ) : revenueProfit ? (
+      ) : expenses ? (
         <ResponsiveContainer width="100%" height="100%">
-          {/* https://recharts.org/en-US/api/LineChart */}
           <LineChart
-            width={500}
-            height={400}
-            data={revenueProfit}
+            data={expenses}
             margin={{
               top: 20,
               right: 0,
@@ -68,6 +65,7 @@ export default function Widget2({ data, error, isLoading, palette }: Props) {
             />
             <YAxis
               yAxisId="left"
+              orientation="left"
               tickLine={false}
               axisLine={false}
               style={{ fontSize: "10px" }}
@@ -80,27 +78,23 @@ export default function Widget2({ data, error, isLoading, palette }: Props) {
               style={{ fontSize: "10px" }}
             />
             <Tooltip />
-            <Legend
-              height={20}
-              wrapperStyle={{
-                margin: "0 0 10px",
-              }}
-            />
             <Line
               yAxisId="left"
               type="monotone"
-              dataKey="profit"
+              dataKey="nonOperationalExpenses"
               stroke={palette.info[500]}
             />
             <Line
               yAxisId="right"
               type="monotone"
-              dataKey="revenue"
+              dataKey="operationalExpenses"
               stroke={palette.primary.main}
             />
           </LineChart>
         </ResponsiveContainer>
-      ) : null}
+      ) : (
+        <>DATA NOT FOUND!</>
+      )}
     </Widget>
   );
 }

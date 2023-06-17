@@ -3,7 +3,7 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 import { SerializedError } from "@reduxjs/toolkit";
 import { Kpi } from "@/types";
 
-import Widget from "@/components/WidgetContainer";
+import Widget from "@/layouts/WidgetContainer";
 import { PieChart, Pie, Cell } from "recharts";
 
 type Props = {
@@ -34,7 +34,7 @@ export default function Widget5({
         <>Loading...</>
       ) : data ? (
         <Stack
-          height="80%"
+          height="75%"
           direction="row"
           justifyContent="space-between"
           alignItems="center"

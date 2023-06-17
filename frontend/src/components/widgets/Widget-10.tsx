@@ -1,4 +1,4 @@
-import Widget from "@/components/WidgetContainer";
+import Widget from "@/layouts/WidgetContainer";
 
 export default function Widget10() {
   return (

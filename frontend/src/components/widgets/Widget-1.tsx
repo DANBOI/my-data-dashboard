@@ -4,15 +4,14 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 import { SerializedError } from "@reduxjs/toolkit";
 import { Kpi } from "@/types";
 
-import Widget from "@/components/WidgetContainer";
+import Widget from "@/layouts/WidgetContainer";
 import {
   ResponsiveContainer,
-  CartesianGrid,
-  BarChart,
-  Bar,
+  AreaChart,
   XAxis,
   YAxis,
   Tooltip,
+  Area,
 } from "recharts";
 
 type Props = {
@@ -22,47 +21,50 @@ type Props = {
   palette: Palette;
 };
 
-export default function Widget3({ data, error, isLoading, palette }: Props) {
-  const revenue = useMemo(
+export default function Widget1({ data, error, isLoading, palette }: Props) {
+  const revenueExpenses = useMemo(
     () =>
       data &&
-      data[0].monthlyData.map(({ month, revenue }) => ({
+      data[0].monthlyData.map(({ month, revenue, expenses }) => ({
         name: month.slice(0, 3).toUpperCase(),
         revenue,
+        expenses,
       })),
     [data]
   );
 
   return (
     <Widget
-      gridArea="Widget-3"
-      title="Revenue Month by Month"
-      subtitle="graph representing the revenue month by month"
+      gridArea="Widget-1"
+      title="Revenue and Expenses"
+      subtitle="top line represents revenue, bottom line represents expenses"
       sideText="+4%"
     >
       {error ? (
         <>Oh no, there was an error</>
       ) : isLoading ? (
         <>Loading...</>
-      ) : revenue ? (
+      ) : revenueExpenses ? (
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart
+          {/* https://recharts.org/en-US/api/AreaChart */}
+          <AreaChart
             width={500}
-            height={300}
-            data={revenue}
+            height={400}
+            data={revenueExpenses}
             margin={{
-              top: 17,
-              right: 15,
-              left: -5,
-              bottom: 58,
+              top: 15,
+              right: 25,
+              left: -10,
+              bottom: 60,
             }}
           >
+            {/* style definitions */}
             <defs>
-              <linearGradient id="gradientStyle-w3" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="gradientStyle-w1" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
                   stopColor={palette.primary[300]}
-                  stopOpacity={0.8}
+                  stopOpacity={0.5}
                 />
                 <stop
                   offset="95%"
@@ -71,21 +73,36 @@ export default function Widget3({ data, error, isLoading, palette }: Props) {
                 />
               </linearGradient>
             </defs>
-            <CartesianGrid vertical={false} stroke={palette.grey[800]} />
+
             <XAxis
               dataKey="name"
-              axisLine={false}
               tickLine={false}
               style={{ fontSize: "10px" }}
             />
             <YAxis
-              axisLine={false}
               tickLine={false}
+              axisLine={{ strokeWidth: "0" }}
               style={{ fontSize: "10px" }}
+              domain={[8000, 23000]}
             />
             <Tooltip />
-            <Bar dataKey="revenue" fill="url(#gradientStyle-w3)" />
-          </BarChart>
+            <Area
+              type="monotone"
+              dataKey="revenue"
+              dot={true}
+              stroke={palette.primary.main}
+              fillOpacity={1}
+              fill="url(#gradientStyle-w1)"
+            />
+            <Area
+              type="monotone"
+              dataKey="expenses"
+              dot={true}
+              stroke={palette.primary.main}
+              fillOpacity={1}
+              fill="url(#gradientStyle-w1)"
+            />
+          </AreaChart>
         </ResponsiveContainer>
       ) : null}
     </Widget>

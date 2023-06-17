@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import theme from "./theme";
 import Header from "./components/Header";
-import Dashboard from "./pages/dashboard";
+import Dashboard from "./pages/Dashboard";
 
 export default function App() {
   return (

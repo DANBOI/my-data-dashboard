@@ -4,7 +4,7 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 import { SerializedError } from "@reduxjs/toolkit";
 import { Product } from "@/types";
 
-import Widget from "@/components/WidgetContainer";
+import Widget from "@/layouts/WidgetContainer";
 import {
   ResponsiveContainer,
   ScatterChart,
