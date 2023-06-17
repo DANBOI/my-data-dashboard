@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { insertKpiData } from "../models/kpiModel";
 import { insertProductsData } from "../models/productModel";
+import { insertTransactionsData } from "../models/transactionModel";
 
 // track the connection
 let isConnected = false;
@@ -26,6 +27,7 @@ export default async () => {
     // await mongoose.connection.dropDatabase();
     // await insertKpiData();
     // await insertProductsData();
+    // await insertTransactionsData();
   } catch (error: any) {
     console.error(`Error: ${error.message}`);
     process.exit(1);

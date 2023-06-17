@@ -45,3 +45,14 @@ export interface Product {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface Transaction {
+  _id: string;
+  id: string;
+  __v: number;
+  buyer: string;
+  amount: number;
+  productIds: Array<string>;
+  createdAt: string;
+  updatedAt: string;
+}
