@@ -41,12 +41,10 @@ export default function Widget4({ data, error, isLoading, palette }: Props) {
       gridArea="Widget-4"
       title="Operational vs Non-Operational Expenses"
       sideText="+4%"
+      error={error}
+      isLoading={isLoading}
     >
-      {error ? (
-        <>Oh no, there was an error</>
-      ) : isLoading ? (
-        <>Loading...</>
-      ) : expenses ? (
+      {expenses && (
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={expenses}
@@ -92,8 +90,6 @@ export default function Widget4({ data, error, isLoading, palette }: Props) {
             />
           </LineChart>
         </ResponsiveContainer>
-      ) : (
-        <>DATA NOT FOUND!</>
       )}
     </Widget>
   );

@@ -39,12 +39,10 @@ export default function Widget3({ data, error, isLoading, palette }: Props) {
       title="Revenue Month by Month"
       subtitle="graph representing the revenue month by month"
       sideText="+4%"
+      error={error}
+      isLoading={isLoading}
     >
-      {error ? (
-        <>Oh no, there was an error</>
-      ) : isLoading ? (
-        <>Loading...</>
-      ) : revenue ? (
+      {revenue && (
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             width={500}
@@ -87,7 +85,7 @@ export default function Widget3({ data, error, isLoading, palette }: Props) {
             <Bar dataKey="revenue" fill="url(#gradientStyle-w3)" />
           </BarChart>
         </ResponsiveContainer>
-      ) : null}
+      )}
     </Widget>
   );
 }

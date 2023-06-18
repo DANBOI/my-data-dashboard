@@ -49,12 +49,10 @@ export default function Widget8({
       gridArea="Widget-8"
       title="Recent Orders"
       sideText={`${data?.length} latest transactions`}
+      error={error}
+      isLoading={isLoading}
     >
-      {error ? (
-        <>Oh no, there was an error</>
-      ) : isLoading ? (
-        <>Loading...</>
-      ) : (
+      {data && (
         <Box
           mt="1rem"
           px="0.5rem"

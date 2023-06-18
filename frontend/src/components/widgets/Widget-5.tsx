@@ -27,12 +27,14 @@ export default function Widget5({
 }: Props) {
   const cellColors = [palette.primary[800], palette.primary[300]];
   return (
-    <Widget gridArea="Widget-5" title="Campaigns and Targets" sideText="+4%">
-      {error ? (
-        <>Oh no, there was an error</>
-      ) : isLoading ? (
-        <>Loading...</>
-      ) : data ? (
+    <Widget
+      gridArea="Widget-5"
+      title="Campaigns and Targets"
+      sideText="+4%"
+      error={error}
+      isLoading={isLoading}
+    >
+      {data && (
         <Stack
           height="75%"
           direction="row"
@@ -86,7 +88,7 @@ export default function Widget5({
             </Typography>
           </Box>
         </Stack>
-      ) : null}
+      )}
     </Widget>
   );
 }

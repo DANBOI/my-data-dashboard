@@ -41,12 +41,10 @@ export default function Widget2({ data, error, isLoading, palette }: Props) {
       title="Profit and Revenue"
       subtitle="top line represents revenue, bottom line represents expenses"
       sideText="+4%"
+      error={error}
+      isLoading={isLoading}
     >
-      {error ? (
-        <>Oh no, there was an error</>
-      ) : isLoading ? (
-        <>Loading...</>
-      ) : revenueProfit ? (
+      {revenueProfit && (
         <ResponsiveContainer width="100%" height="100%">
           {/* https://recharts.org/en-US/api/LineChart */}
           <LineChart
@@ -100,7 +98,7 @@ export default function Widget2({ data, error, isLoading, palette }: Props) {
             />
           </LineChart>
         </ResponsiveContainer>
-      ) : null}
+      )}
     </Widget>
   );
 }

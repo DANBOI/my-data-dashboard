@@ -39,12 +39,10 @@ export default function Widget9({ data, error, isLoading, palette }: Props) {
       gridArea="Widget-9"
       title="Expense Breakdown By Category"
       sideText="+4%"
+      error={error}
+      isLoading={isLoading}
     >
-      {error ? (
-        <>Oh no, there was an error</>
-      ) : isLoading ? (
-        <>Loading...</>
-      ) : pieDataSet ? (
+      {pieDataSet && (
         <Stack
           height="60%"
           direction="row"
@@ -75,7 +73,7 @@ export default function Widget9({ data, error, isLoading, palette }: Props) {
             </Box>
           ))}
         </Stack>
-      ) : null}
+      )}
     </Widget>
   );
 }

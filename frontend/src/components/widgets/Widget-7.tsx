@@ -44,12 +44,10 @@ export default function Widget7({
       gridArea="Widget-7"
       title="List of Products"
       sideText={`${data?.length} products`}
+      error={error}
+      isLoading={isLoading}
     >
-      {error ? (
-        <>Oh no, there was an error</>
-      ) : isLoading ? (
-        <>Loading...</>
-      ) : (
+      {data && (
         <Box
           mt="0.5rem"
           px="0.5rem"

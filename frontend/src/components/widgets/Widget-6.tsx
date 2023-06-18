@@ -34,12 +34,10 @@ export default function Widget6({ data, error, isLoading, palette }: Props) {
       gridArea="Widget-6"
       title="Product Prices vs Expenses"
       sideText="+4%"
+      error={error}
+      isLoading={isLoading}
     >
-      {error ? (
-        <>Oh no, there was an error</>
-      ) : isLoading ? (
-        <>Loading...</>
-      ) : productExpenseData ? (
+      {productExpenseData && (
         <ResponsiveContainer width="100%" height="100%">
           <ScatterChart
             margin={{
@@ -77,7 +75,7 @@ export default function Widget6({ data, error, isLoading, palette }: Props) {
             />
           </ScatterChart>
         </ResponsiveContainer>
-      ) : null}
+      )}
     </Widget>
   );
 }

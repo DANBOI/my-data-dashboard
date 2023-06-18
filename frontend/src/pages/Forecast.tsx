@@ -37,69 +37,69 @@ export default function Forecast() {
     }));
   }, [data]);
 
-  return error ? (
-    <>Oh no, there was an error</>
-  ) : isLoading ? (
-    <>Loading...</>
-  ) : formattedData ? (
+  return (
     <WidgetContainer
       title="Actual Revenue and Forecasted Revenue"
       subtitle="charted revenue and forecasted revenue based on a simple linear
     regression model"
       sideText="Toggle Forecasted Revenue for Next Year"
       sideAction={() => setShowForcast(!showForcast)}
+      error={error}
+      isLoading={isLoading}
     >
-      <ResponsiveContainer width="100%" height="100%">
-        <LineChart
-          data={formattedData}
-          margin={{
-            top: 20,
-            right: 75,
-            left: 20,
-            bottom: 80,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" stroke={palette.grey[800]} />
-          <XAxis dataKey="name" tickLine={false} style={{ fontSize: "10px" }}>
-            <Label value="Month" offset={-5} position="insideBottom" />
-          </XAxis>
-          <YAxis
-            domain={[12000, 26000]}
-            axisLine={{ strokeWidth: "0" }}
-            style={{ fontSize: "10px" }}
-            tickFormatter={(value) => `$${value}`}
+      {formattedData && (
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart
+            data={formattedData}
+            margin={{
+              top: 20,
+              right: 75,
+              left: 20,
+              bottom: 80,
+            }}
           >
-            <Label
-              value="Revenue in USD"
-              angle={-90}
-              offset={5}
-              position="insideLeft"
-            />
-          </YAxis>
-          <Tooltip />
-          <Legend verticalAlign="top" />
-          <Line
-            type="monotone"
-            dataKey="Actual Revenue"
-            stroke={palette.primary.main}
-            strokeWidth={0}
-            dot={{ strokeWidth: 5 }}
-          />
-          <Line
-            type="monotone"
-            dataKey="Regression Line"
-            stroke={palette.info[500]}
-            dot={false}
-          />
-          {showForcast && (
+            <CartesianGrid strokeDasharray="3 3" stroke={palette.grey[800]} />
+            <XAxis dataKey="name" tickLine={false} style={{ fontSize: "10px" }}>
+              <Label value="Month" offset={-5} position="insideBottom" />
+            </XAxis>
+            <YAxis
+              domain={[12000, 26000]}
+              axisLine={{ strokeWidth: "0" }}
+              style={{ fontSize: "10px" }}
+              tickFormatter={(value) => `$${value}`}
+            >
+              <Label
+                value="Revenue in USD"
+                angle={-90}
+                offset={5}
+                position="insideLeft"
+              />
+            </YAxis>
+            <Tooltip />
+            <Legend verticalAlign="top" />
             <Line
-              strokeDasharray="5 5"
-              dataKey="Forecasted Revenue"
-              stroke={palette.secondary[300]}
+              type="monotone"
+              dataKey="Actual Revenue"
+              stroke={palette.primary.main}
+              strokeWidth={0}
+              dot={{ strokeWidth: 5 }}
             />
-          )}
-        </LineChart>
-      </ResponsiveContainer>
+            <Line
+              type="monotone"
+              dataKey="Regression Line"
+              stroke={palette.info[500]}
+              dot={false}
+            />
+            {showForcast && (
+              <Line
+                strokeDasharray="5 5"
+                dataKey="Forecasted Revenue"
+                stroke={palette.secondary[300]}
+              />
+            )}
+          </LineChart>
+        </ResponsiveContainer>
+      )}
     </WidgetContainer>
-  ) : null;
+  );
 }

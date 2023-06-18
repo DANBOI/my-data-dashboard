@@ -32,19 +32,16 @@ export default function Widget1({ data, error, isLoading, palette }: Props) {
       })),
     [data]
   );
-
   return (
     <Widget
       gridArea="Widget-1"
       title="Revenue and Expenses"
       subtitle="top line represents revenue, bottom line represents expenses"
       sideText="+4%"
+      error={error}
+      isLoading={isLoading}
     >
-      {error ? (
-        <>Oh no, there was an error</>
-      ) : isLoading ? (
-        <>Loading...</>
-      ) : revenueExpenses ? (
+      {revenueExpenses && (
         <ResponsiveContainer width="100%" height="100%">
           {/* https://recharts.org/en-US/api/AreaChart */}
           <AreaChart
@@ -104,7 +101,7 @@ export default function Widget1({ data, error, isLoading, palette }: Props) {
             />
           </AreaChart>
         </ResponsiveContainer>
-      ) : null}
+      )}
     </Widget>
   );
 }

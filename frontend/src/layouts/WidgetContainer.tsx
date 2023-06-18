@@ -1,4 +1,6 @@
 import { Box, Button, Stack, Typography, useTheme } from "@mui/material";
+import { SerializedError } from "@reduxjs/toolkit";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 
 type Props = {
   gridArea?: string;
@@ -6,6 +8,8 @@ type Props = {
   subtitle?: string;
   sideAction?: () => void;
   sideText?: string;
+  error?: FetchBaseQueryError | SerializedError;
+  isLoading?: boolean;
   children: React.ReactNode;
   icon?: React.ReactNode;
 };
@@ -15,8 +19,10 @@ export default function Widget({
   icon,
   title,
   subtitle = "",
-  sideText,
   sideAction,
+  sideText,
+  error,
+  isLoading = false,
   children,
 }: Props) {
   const { palette } = useTheme();
@@ -24,6 +30,7 @@ export default function Widget({
     <Box
       gridArea={gridArea}
       bgcolor={palette.background.paper}
+      position="relative"
       height="100%"
       overflow="hidden"
       borderRadius="1rem"
@@ -52,7 +59,7 @@ export default function Widget({
           </Box>
         </Stack>
         {/* rightside */}
-        {sideAction ? (
+        {sideAction && children ? (
           <Button
             onClick={sideAction}
             sx={{
@@ -72,10 +79,29 @@ export default function Widget({
             fontWeight="700"
             color={palette.secondary[200]}
           >
-            {sideText}
+            {children ? sideText : null}
           </Typography>
         )}
       </Stack>
+
+      {/* exceptional message */}
+      <Typography
+        hidden={Boolean(children)}
+        variant="h4"
+        color={palette.secondary[200]}
+        sx={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        {error
+          ? "Oh no, there was an error"
+          : isLoading
+          ? "Loading..."
+          : "No Data Found"}
+      </Typography>
 
       {/* widget body */}
       {children}
